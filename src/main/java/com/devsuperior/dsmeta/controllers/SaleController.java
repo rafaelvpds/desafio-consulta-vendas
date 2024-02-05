@@ -33,18 +33,23 @@ public class SaleController {
 
 	@GetMapping(value = "/report")
 	public ResponseEntity<Page<SaleMinSallerDTO>> getReport(Pageable pageable,
-			@RequestParam(defaultValue = "") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate dateMin,
-			@RequestParam(defaultValue = "") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate dateMax,
+			@RequestParam(defaultValue = "") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate minDate,
+			@RequestParam(defaultValue = "") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate maxDate,
 			@RequestParam(defaultValue = "") String name) {
 
-		return ResponseEntity.ok(service.getReport(pageable, dateMin, dateMax, name));
+		System.out.println("Passou aqui +DATE " + maxDate);
+		System.out.println("Passou aqui -DATE " + minDate);
+		System.out.println("Passou aqui NAME " + name);
+		return ResponseEntity.ok(service.getReport(pageable, minDate, maxDate,
+				name));
 	}
 
 	@GetMapping(value = "/summary")
 	public ResponseEntity<Page<SaleMinSalleSummaryDTO>> getSummary(Pageable pageable,
-			@RequestParam(defaultValue = "") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate dateMin,
-			@RequestParam(defaultValue = "") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate dateMax) {
+			@RequestParam(defaultValue = "") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate minDate,
+			@RequestParam(defaultValue = "") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate maxDate) {
 
-		return ResponseEntity.ok(service.getSumary(pageable, dateMin, dateMax));
+		return ResponseEntity.ok(service.getSumary(pageable, minDate, maxDate));
 	}
+
 }
